@@ -56,13 +56,6 @@ public class MapLoader : MonoBehaviour
         }
 
         // Generate border around map
-        // horizontal bottom row
-        for (int j = 0; j < mapData.GetLength(1); ++j)  // columns, horizontal axis
-        {
-            // TEMP
-            GameObject newTile = Instantiate(tilePalette[1]);
-            newTile.transform.position = new Vector3(j * gridXSize, -mapData.GetLength(0) * gridYSize);
-        }
         // horizontal top row
         for (int j = 0; j < mapData.GetLength(1); ++j)  // columns, horizontal axis
         {
@@ -71,14 +64,14 @@ public class MapLoader : MonoBehaviour
             newTile.transform.position = new Vector3(j * gridXSize, gridYSize);
         }
         // vertical left column
-        for (int i = -1; i < mapData.GetLength(0) + 1; ++i)  // rows, vertical axis
+        for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
         {
             // TEMP
             GameObject newTile = Instantiate(tilePalette[1]);
             newTile.transform.position = new Vector3(-gridXSize, -i * gridYSize);
         }
         // vertical right column
-        for (int i = -1; i < mapData.GetLength(0) + 1; ++i)  // rows, vertical axis
+        for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
         {
             // TEMP
             GameObject newTile = Instantiate(tilePalette[1]);
