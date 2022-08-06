@@ -20,6 +20,9 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private TextAsset tempLevelData;
     [SerializeField] private GameObject[] tilePalette;
 
+    [Header("Other map objects")]
+    [SerializeField] private GameObject floor;
+
 
     // Start is called before the first frame update
     void Start()
@@ -77,5 +80,11 @@ public class MapLoader : MonoBehaviour
             GameObject newTile = Instantiate(tilePalette[1]);
             newTile.transform.position = new Vector3(mapData.GetLength(1) * gridXSize, -i * gridYSize);
         }
+
+        // Create floor detection beneath ground for player death
+        // expand floor by no. tiles in row + additional buffer space (in case player falls outside area of the map)
+        floor.transform.localScale = new Vector3(floor.transform.localScale.x * 2 * mapData.GetLength(1), floor.transform.localScale.y, floor.transform.localScale.z);
+        // place coordinate floor at the middle of the map
+        floor.transform.position += new Vector3(0.5f * gridXSize * mapData.GetLength(1), 0f, 0f);
     }
 }

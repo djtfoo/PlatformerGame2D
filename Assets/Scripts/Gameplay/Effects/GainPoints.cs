@@ -8,6 +8,10 @@ public class GainPoints : Effect
 
     public override void TriggerEffect(Collision2D col)
     {
-        Debug.Log("Points gained: " + pointsGain);
+        Player player = col.gameObject.GetComponent<Player>();
+        if (player != null)
+            player.IncrementScore(pointsGain);
+        else
+            Debug.Log("GainPoints Effect Component on " + gameObject.name + " triggered, but did not collide with Player");
     }
 }
