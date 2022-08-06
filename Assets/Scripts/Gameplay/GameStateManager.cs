@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameStateManager : MonoBehaviour
 {
-    [SerializeField]
-    private int numLivesPerPlayer = 3;
 
     // GameStateManager Singleton
     private static GameStateManager instance = null;
@@ -14,7 +13,22 @@ public class GameStateManager : MonoBehaviour
         get { return instance; }
     }
 
+    // Game State Variables
+    [Header("Game Variables")]
+    [SerializeField]
+    private int numLivesPerPlayer = 3;
+
+    [Header("Object References")]
     [SerializeField] private Player[] players;  // Reference(s) to Player object
+
+    // Timer
+    private float gameTimer = 0f;
+    public float GameTimer
+    {
+        get { return gameTimer; }
+    }
+    [Header("Timer")]
+    [SerializeField] private UnityEvent onTimerUpdated;
 
     protected void Awake()
     {
@@ -34,6 +48,15 @@ public class GameStateManager : MonoBehaviour
     void Start()
     {
         StartGame();
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        // Update game time
+        gameTimer += Time.deltaTime;
+        // Invoke timer update event
+        onTimerUpdated.Invoke();
     }
 
     /// <summary>

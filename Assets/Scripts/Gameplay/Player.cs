@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     private int score = 0;
+    public int Score
+    {
+        get { return score; }
+    }
     private int numLives = 3;
+    public int NumLives
+    {
+        get { return numLives; }
+    }
 
     private bool isDead = false;
     public bool IsDead
     {
         get { return isDead; }
     }
+
+    [SerializeField] private UnityEvent onScoreChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +59,16 @@ public class Player : MonoBehaviour
 
     public void IncrementScore(int gain)
     {
-        score += gain;
         Debug.Log("Points gained: " + gain);
+        SetScore(score + gain);
+    }
+
+    private void SetScore(int newScore)
+    {
+        // Set score
+        score = newScore;
+
+        // Invoke score changed event
+        onScoreChanged.Invoke();
     }
 }
