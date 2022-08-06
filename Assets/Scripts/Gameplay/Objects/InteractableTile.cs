@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class InteractableTile : Tile
+public class InteractableTile : Tile
 {
     [SerializeField] ContactFilter2D hitContactFilter;  // filter for contacts with tile from below
+
+    [SerializeField] private Effect[] triggerEffects;
 
     [SerializeField] private Transform tileSprite;
 
@@ -18,18 +20,24 @@ public abstract class InteractableTile : Tile
             if (this.GetComponent<Collider2D>().IsTouching(col.collider, hitContactFilter))
             {
                 // Trigger effect of tile
-                TriggerHitEffect();
+                TriggerHitEffect(col);
                 // Feedback of tile being hit
-                TriggerHitFeedback();
+                OnHitFeedback();
             }
         }
 
     }
 
     // Tile effect to trigger if player hits the tile
-    protected abstract void TriggerHitEffect();
+    private void TriggerHitEffect(Collision2D col)
+    {
+        foreach (Effect effect in triggerEffects)
+        {
+            effect.TriggerEffect(col);
+        }
+    }
 
-    protected void TriggerHitFeedback()
+    protected void OnHitFeedback()
     {
         // Shake tile from hit
         StartCoroutine(ShakeTile());
