@@ -40,8 +40,6 @@ public class MapLoader : MonoBehaviour
     {
         // Obtain map data from CSV
         char[,] mapData = MapParser.ParseMapData(textData);
-        Debug.Log(mapData.GetLength(0));
-        Debug.Log(mapData.GetLength(1));
 
         // Generate map tiles
         for (int i = 0; i < mapData.GetLength(0); ++i)  // rows, vertical axis
