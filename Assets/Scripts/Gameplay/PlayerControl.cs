@@ -22,15 +22,18 @@ public class PlayerControl : MonoBehaviour
     private Vector3 localScale;
     private Rigidbody2D rb;
 
-
     private float horizontalMovement = 0f;
     private bool justJumped = false;
+
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         localScale = transform.localScale;
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,6 +56,17 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // if player started moving, set 'Walk' animation to true
+        if (horizontalMovement != 0f)
+        {
+            if (animator != null) animator.SetBool("Walk", true);
+        }
+        // else if player stopped moving, set 'Walk' animation to false
+        else
+        {
+            if (animator != null) animator.SetBool("Walk", false);
+        }
+
         // Move
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
 
