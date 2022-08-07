@@ -73,8 +73,12 @@ public class PlayerControl : MonoBehaviour
         // Apply jump
         if (justJumped)
         {
+            // Add force upwards to Rigidbody2D
             justJumped = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            // Play SFX
+            AudioManager.instance.PlaySFX("Jump");
         }
     }
 

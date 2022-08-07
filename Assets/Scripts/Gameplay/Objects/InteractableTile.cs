@@ -33,7 +33,7 @@ public class InteractableTile : Tile
     {
         foreach (Effect effect in triggerEffects)
         {
-            effect.TriggerEffect(col);
+            effect.TriggerEffect(col.collider);
         }
     }
 
@@ -41,6 +41,9 @@ public class InteractableTile : Tile
     {
         // Shake tile from hit
         StartCoroutine(ShakeTile());
+
+        // Play Hit SFX
+        AudioManager.instance.PlaySFX("Hit");
     }
 
     protected IEnumerator ShakeTile()

@@ -6,7 +6,7 @@ public class GainLife : Effect
 {
     [SerializeField] private int lifeGain = 1;
 
-    public override void TriggerEffect(Collision2D col)
+    public override void TriggerEffect(Collider2D col)
     {
 
     }

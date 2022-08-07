@@ -5,6 +5,8 @@ using UnityEngine;
 public class DestroyObject : Effect
 {
     [SerializeField] private GameObject thisObject;
+    [Tooltip("Name of SFX to play upon object destroy")]
+    [SerializeField] private string sfxNameOnDestroy = "";
 
     protected void Awake()
     {
@@ -12,8 +14,15 @@ public class DestroyObject : Effect
             thisObject = this.gameObject;
     }
 
-    public override void TriggerEffect(Collision2D col)
+    public override void TriggerEffect(Collider2D col)
     {
+        // Destroy object
         Destroy(thisObject);
+
+        // Play SFX
+        if (!string.IsNullOrEmpty(sfxNameOnDestroy))
+        {
+            AudioManager.instance.PlaySFX(sfxNameOnDestroy);
+        }
     }
 }

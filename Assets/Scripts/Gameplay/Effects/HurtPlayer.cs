@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HurtPlayer : Effect
 {
-    public override void TriggerEffect(Collision2D col)
+    public override void TriggerEffect(Collider2D col)
     {
         Debug.Log("Player got hurt");
 

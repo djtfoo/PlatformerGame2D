@@ -6,7 +6,7 @@ public class GainPoints : Effect
 {
     [SerializeField] private int pointsGain = 100;
 
-    public override void TriggerEffect(Collision2D col)
+    public override void TriggerEffect(Collider2D col)
     {
         Player player = col.gameObject.GetComponent<Player>();
         if (player != null)

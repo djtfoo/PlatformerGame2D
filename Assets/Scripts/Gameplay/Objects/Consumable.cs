@@ -6,7 +6,7 @@ public class Consumable : Object
 {
     [SerializeField] private Effect[] triggerEffects;
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         // check if collision is with player
         if (col.gameObject.tag == "Player")
@@ -19,7 +19,7 @@ public class Consumable : Object
     }
 
     // Effect to trigger if player picks up the consumable
-    private void TriggerConsumedEffect(Collision2D col)
+    private void TriggerConsumedEffect(Collider2D col)
     {
         foreach (Effect effect in triggerEffects)
         {

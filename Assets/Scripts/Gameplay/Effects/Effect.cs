@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour
 {
-    public abstract void TriggerEffect(Collision2D col);
+    public abstract void TriggerEffect(Collider2D col);
 }
