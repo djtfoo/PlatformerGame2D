@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class MapObjectSelector : MonoBehaviour
 {
-    private ObjectData objectData;
-
-    // Start is called before the first frame update
-    void Start()
+    private char id;
+    public char Id
     {
-        
+        get { return id; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StoreObjectId(char id)
     {
-        
+        this.id = id;
     }
 }

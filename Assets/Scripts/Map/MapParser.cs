@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using UnityEngine;
 
 public class MapParser
@@ -15,8 +16,6 @@ public class MapParser
 
         char[,] mapData = new char[lines.Length,    // rows
             lines[0].Length];   // columns (no. characters in each row)
-        Debug.Log(mapData.GetLength(0));
-        Debug.Log(mapData.GetLength(1));
 
         // Read characters in each line
         for (int i = 0; i < lines.Length; ++i)
@@ -34,5 +33,20 @@ public class MapParser
         }
         
         return mapData;
+    }
+
+    public static string SerializeMapData(char[,] data)
+    {
+        StringBuilder sb = new StringBuilder(data.GetLength(0) * data.GetLength(1));
+        for (int i = 0; i < data.GetLength(0); i++)  // rows, vertical axis
+        {
+            for (int j = 0; j < data.GetLength(1); j++)  // columns, horizontal axis
+                sb.Append(data[i, j]);
+
+            if (i < data.GetLength(0) - 1)  // not the last row, add a newline
+                sb.Append("\r\n");
+        }
+
+        return sb.ToString();
     }
 }

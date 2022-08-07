@@ -70,7 +70,7 @@ public class MapLoader : MonoBehaviour
     /// </summary>
     private void GenerateMap(string textData)
     {
-        // Obtain map data from CSV
+        // Obtain map data from text file
         char[,] mapData = MapParser.ParseMapData(textData);
 
         MapGenerator.Instance.GenerateMap(mapData, transform, false);
