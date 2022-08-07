@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81daaba4b3df7f3498a7a4114306688c, type: 3}
+  m_Name: GlobalMapData
+  m_EditorClassIdentifier: 
+  gridXSize: 0.96
+  gridYSize: 0.96
+  mapHeight: 16
+  objectData:
+  - id: 48
+    obj: {fileID: 2388865225145402698, guid: 22f199b72cc565f44a7cc71685c41956, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 66
+    obj: {fileID: 1077693015465534122, guid: a2f0cb7617843244189f64b0b31a2de4, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 49
+    obj: {fileID: 604669724493594313, guid: 4f0f733233ffda94c97d326ee3bf4f64, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 72
+    obj: {fileID: 5491182186904639194, guid: 2203bb3f701c52a49b9f00ab7882f7a6, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 70
+    obj: {fileID: 7584368573169824816, guid: 4c0b88c867b1a8045a23d0e188b98368, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 67
+    obj: {fileID: 593962164951455794, guid: d45f8b9c09a2474439595f3e8ae88b16, type: 3}
+    sizeX: 1
+    sizeY: 1

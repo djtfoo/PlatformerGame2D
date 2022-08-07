@@ -11,14 +11,9 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    [Header("Grid")]
-    [SerializeField] private float gridXSize;
-    [SerializeField] private float gridYSize;
-
     [Header("Map Assets")]
     // temp variable for testing
     [SerializeField] private TextAsset tempLevelData;
-    [SerializeField] private GameObject[] tilePalette;
 
     [Header("Other Map Objects")]
     [SerializeField] private GameObject floor;
@@ -78,48 +73,12 @@ public class MapLoader : MonoBehaviour
         // Obtain map data from CSV
         char[,] mapData = MapParser.ParseMapData(textData);
 
-        // Generate map tiles
-        for (int i = 0; i < mapData.GetLength(0); ++i)  // rows, vertical axis
-        {
-            for (int j = 0; j < mapData.GetLength(1); ++j)  // columns, horizontal axis
-            {
-                // TEMP
-                if (mapData[i, j] != '0')
-                {
-                    // set as a child of this object
-                    GameObject newTile = Instantiate(tilePalette[0], transform);
-                    newTile.transform.position = new Vector3(j * gridXSize, -i * gridYSize);
-                }
-            }
-        }
-
-        // Generate border around map
-        // horizontal top row
-        for (int j = 0; j < mapData.GetLength(1); ++j)  // columns, horizontal axis
-        {
-            // TEMP
-            GameObject newTile = Instantiate(tilePalette[1], transform);
-            newTile.transform.position = new Vector3(j * gridXSize, gridYSize);
-        }
-        // vertical left column
-        for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
-        {
-            // TEMP
-            GameObject newTile = Instantiate(tilePalette[1], transform);
-            newTile.transform.position = new Vector3(-gridXSize, -i * gridYSize);
-        }
-        // vertical right column
-        for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
-        {
-            // TEMP
-            GameObject newTile = Instantiate(tilePalette[1], transform);
-            newTile.transform.position = new Vector3(mapData.GetLength(1) * gridXSize, -i * gridYSize);
-        }
+        MapGenerator.Instance.GenerateMap(mapData, transform, false);
 
         // Create floor detection beneath ground for player death
         // expand floor by no. tiles in row + additional buffer space (in case player falls outside area of the map)
         floor.transform.localScale = new Vector3(floor.transform.localScale.x * 2 * mapData.GetLength(1), floor.transform.localScale.y, floor.transform.localScale.z);
         // place coordinate floor at the middle of the map
-        floor.transform.position += new Vector3(0.5f * gridXSize * mapData.GetLength(1), 0f, 0f);
+        floor.transform.position += new Vector3(0.5f * MapGenerator.Instance.GlobalMapDataSO.gridXSize * mapData.GetLength(1), 0f, 0f);
     }
 }
