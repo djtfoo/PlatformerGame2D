@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class GameStateManager : MonoBehaviour
 {
-
     // GameStateManager Singleton
     private static GameStateManager instance = null;
     public static GameStateManager Instance
@@ -21,12 +20,18 @@ public class GameStateManager : MonoBehaviour
     [Header("Object References")]
     [SerializeField] private Player[] players;  // Reference(s) to Player object
 
+    // Game State
+    [Header("Game Initializers")]
+    [SerializeField] private MapLoader mapLoader;
+
     // Timer
     private float gameTimer = 0f;
     public float GameTimer
     {
         get { return gameTimer; }
     }
+    private bool runTimer = false;
+
     [Header("Timer")]
     [SerializeField] private UnityEvent onTimerUpdated;
 
@@ -47,25 +52,49 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartGame();
+        InitGame();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        // Update game time
-        gameTimer += Time.deltaTime;
-        // Invoke timer update event
-        onTimerUpdated.Invoke();
+        if (runTimer)
+        {
+            // Update game time
+            gameTimer += Time.deltaTime;
+            // Invoke timer update event
+            onTimerUpdated.Invoke();
+        }
     }
 
     /// <summary>
-    /// Called to start the game at the start of the game or after a reset.
+    /// Called to start the game at the start of the game.
+    /// </summary>
+    private void InitGame()
+    {
+        // Initialize Player stats
+        foreach (Player player in players)
+            player.InitPlayer(numLivesPerPlayer);
+
+        // Start the game
+        StartGame();
+    }
+
+    /// <summary>
+    /// Called to start the game after a restart.
     /// </summary>
     public void StartGame()
     {
+        // Reset Player stats
         foreach (Player player in players)
             player.ResetPlayer();
+
+        // Re-initialize map and objects
+        mapLoader.LoadMap();
+        // Reset player position -- should be in mapLoader
+
+        // Start the game timer
+        runTimer = true;
     }
 
     /// <summary>
@@ -84,12 +113,41 @@ public class GameStateManager : MonoBehaviour
             }
         }
 
-        // If all players are dead, restart game with lives lost
+        // If all players are dead, restart game
         if (playersDead)
         {
-            // TODO: Trigger 'game over' screen
+            // Check if the game is over, i.e. all players have 0 lives left
+            bool gameOver = true;
+            foreach (Player player in players)
+            {
+                if (player.NumLives > 0)
+                {
+                    gameOver = false;
+                    break;
+                }
+            }
 
-            // TODO: Reset game
+            // if game over, trigger 'game over' screen
+            if (gameOver)
+            {
+                Debug.Log("Game Over");
+
+                runTimer = false;
+                // Show 'game over' screen
+
+            }
+            // else, restart game
+            else
+            {
+                StartCoroutine(RestartGame(1f));    // Wait 1 second before restarting game
+            }
         }
+    }
+
+    private IEnumerator RestartGame(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        StartGame();
     }
 }

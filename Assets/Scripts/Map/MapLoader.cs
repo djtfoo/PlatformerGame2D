@@ -20,26 +20,60 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private TextAsset tempLevelData;
     [SerializeField] private GameObject[] tilePalette;
 
-    [Header("Other map objects")]
+    [Header("Other Map Objects")]
     [SerializeField] private GameObject floor;
 
+    [Header("Gameplay Objects")]
+    [SerializeField] private Player player;
+    [SerializeField] private CameraController camera;
 
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 playerSpawnPos;
+    private Vector3 cameraInitPos;
+
+    // Other Variables
+    private bool firstTime; // whether it is the first time a map is being loaded
+
+    void Awake()
     {
-        LoadMap(tempLevelData.text);
+        // TEMP: Player spawn position is the position of the Player in the scene
+        //  (Should be a spawn point set in the level instead)
+        playerSpawnPos = player.transform.position;
+
+        // Get camera's initial position
+        // (Should be a point set dependent on the player's spawn point)
+        cameraInitPos = camera.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadMap()
     {
+        // if not the first time loading the map, destroy entities
+        if (!firstTime)
+        {
+            // Destroy the existing map first
+            Debug.Log("Destroy existing map first");
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
 
+        // Generate the map
+        GenerateMap(tempLevelData.text);
+
+        // Set Player at player spawn position
+        player.transform.position = playerSpawnPos;
+
+        // Set Camera at initial position
+        camera.transform.position = cameraInitPos;
+
+        // No longer the first time
+        firstTime = false;
     }
 
     /// <summary>
-    /// Load map data from text file.
+    /// Generate map data from text file.
     /// </summary>
-    private void LoadMap(string textData)
+    private void GenerateMap(string textData)
     {
         // Obtain map data from CSV
         char[,] mapData = MapParser.ParseMapData(textData);
@@ -52,7 +86,8 @@ public class MapLoader : MonoBehaviour
                 // TEMP
                 if (mapData[i, j] != '0')
                 {
-                    GameObject newTile = Instantiate(tilePalette[0]);
+                    // set as a child of this object
+                    GameObject newTile = Instantiate(tilePalette[0], transform);
                     newTile.transform.position = new Vector3(j * gridXSize, -i * gridYSize);
                 }
             }
@@ -63,21 +98,21 @@ public class MapLoader : MonoBehaviour
         for (int j = 0; j < mapData.GetLength(1); ++j)  // columns, horizontal axis
         {
             // TEMP
-            GameObject newTile = Instantiate(tilePalette[1]);
+            GameObject newTile = Instantiate(tilePalette[1], transform);
             newTile.transform.position = new Vector3(j * gridXSize, gridYSize);
         }
         // vertical left column
         for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
         {
             // TEMP
-            GameObject newTile = Instantiate(tilePalette[1]);
+            GameObject newTile = Instantiate(tilePalette[1], transform);
             newTile.transform.position = new Vector3(-gridXSize, -i * gridYSize);
         }
         // vertical right column
         for (int i = -1; i < mapData.GetLength(0); ++i)  // rows, vertical axis
         {
             // TEMP
-            GameObject newTile = Instantiate(tilePalette[1]);
+            GameObject newTile = Instantiate(tilePalette[1], transform);
             newTile.transform.position = new Vector3(mapData.GetLength(1) * gridXSize, -i * gridYSize);
         }
 

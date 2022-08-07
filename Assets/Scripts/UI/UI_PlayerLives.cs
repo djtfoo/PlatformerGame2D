@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TMP_Text))]
-public class UI_PlayerScore : MonoBehaviour
+public class UI_PlayerLives : MonoBehaviour
 {
     private TMP_Text textObject;
 
@@ -14,9 +14,9 @@ public class UI_PlayerScore : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateScoreText(Player player)
+    public void UpdateLivesText(Player player)
     {
         // Update text
-        textObject.text = string.Format("{0}", player.Score.ToString("000000"));
+        textObject.text = string.Format("X{0}", player.NumLives);
     }
 }

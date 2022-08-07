@@ -22,18 +22,17 @@ public class Player : MonoBehaviour
         get { return isDead; }
     }
 
+    [Header("Events")]
     [SerializeField] private UnityEvent onScoreChanged;
+    [SerializeField] private UnityEvent onLivesChanged;
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Called to reset the player at the start of the game.
+    /// </summary>
+    public void InitPlayer(int startingLives)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        SetNumLives(startingLives);
+        ResetPlayer();
     }
 
     /// <summary>
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void ResetPlayer()
     {
-        score = 0;
+        SetScore(0);
         isDead = false;
     }
 
@@ -50,8 +49,8 @@ public class Player : MonoBehaviour
         // Set Player's death
         isDead = true;
 
-        // Disable Player Controls
-        this.GetComponent<PlayerControl>().enabled = false;
+        // Lose 1 life
+        SetNumLives(numLives - 1);
 
         // Update GameStateManager
         GameStateManager.Instance.UpdatePlayerDeaths();
@@ -70,5 +69,14 @@ public class Player : MonoBehaviour
 
         // Invoke score changed event
         onScoreChanged.Invoke();
+    }
+
+    private void SetNumLives(int newLives)
+    {
+        // Set lives
+        numLives = newLives;
+
+        // Invoke lives changed event
+        onLivesChanged.Invoke();
     }
 }

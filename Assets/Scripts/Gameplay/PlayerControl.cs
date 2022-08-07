@@ -101,4 +101,13 @@ public class PlayerControl : MonoBehaviour
     {
         return rb.IsTouching(groundContactFilter);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "DeathTrigger")
+        {
+            // Disable player movement
+            rb.simulated = false;
+        }
+    }
 }
