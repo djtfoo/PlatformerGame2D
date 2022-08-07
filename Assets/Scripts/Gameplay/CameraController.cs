@@ -14,16 +14,27 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform objectToTrack;
 
+    private Vector3 initialCameraPos;
+
     private float currXPos;
+    private float initialXPos;
 
     private float maxXPos;  // stop tracking once this point is reached
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        currXPos = objectToTrack.position.x;
+        initialCameraPos = transform.position;
+        initialXPos = objectToTrack.position.x;
+        currXPos = initialXPos;
         // TODO: update maxXPos limit
         maxXPos = 1000f;
+    }
+
+    public void ResetCamera()
+    {
+        transform.position = initialCameraPos;
+        currXPos = initialXPos;
     }
 
     // Update is called once per frame

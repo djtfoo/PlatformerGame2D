@@ -32,6 +32,7 @@ public class PlayerState : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onScoreChanged;
     [SerializeField] private UnityEvent onLivesChanged;
+    [SerializeField] private UnityEvent onPlayerHurt;
 
     /// <summary>
     /// Called to reset the player at the start of the game.
@@ -69,6 +70,9 @@ public class PlayerState : MonoBehaviour
         // Disable user input and rigidbody
         GetComponent<PlayerControl>().EnableUserInput(false);
         GetComponent<PlayerControl>().EnableRigidbody(false);
+
+        // Trigger Hurt event
+        onPlayerHurt.Invoke();
     }
 
     public void SetPlayerWon()

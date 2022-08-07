@@ -25,6 +25,7 @@ public class GameStateManager : MonoBehaviour
     {
         get { return players; }
     }
+    [SerializeField] private CameraController camera;   // Reference to Camera
 
     // Game State
     [Header("Game Initializers")]
@@ -118,7 +119,8 @@ public class GameStateManager : MonoBehaviour
 
         // Re-initialize map and objects
         mapLoader.LoadMap();
-        // Reset player position -- should be in mapLoader
+        // Reset camera position
+        camera.ResetCamera();
 
         // Start the game timer
         runTimer = true;
@@ -147,6 +149,10 @@ public class GameStateManager : MonoBehaviour
         if (playerWon)
         {
             Debug.Log("You Won!");
+
+            // Stop timer
+            runTimer = false;
+
             // Show game win screen
             EnableGameOverScreen(true);
 
