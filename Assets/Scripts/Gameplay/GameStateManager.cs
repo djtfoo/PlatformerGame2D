@@ -31,7 +31,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private MapLoader mapLoader;
 
     [Header("Game Screens")]
-    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private UI_GameOverScreen gameOverScreen;
 
     // Timer
     private double gameTimer = 0f;
@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour
         }
 
         // Disable game over screen
-        gameOverScreen.SetActive(false);
+        gameOverScreen.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -146,8 +146,9 @@ public class GameStateManager : MonoBehaviour
 
         if (playerWon)
         {
-            // Show game win screen
             Debug.Log("You Won!");
+            // Show game win screen
+            EnableGameOverScreen(true);
 
             return;
         }
@@ -184,7 +185,7 @@ public class GameStateManager : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 // Show 'game over' screen
-                gameOverScreen.SetActive(true);
+                EnableGameOverScreen(false);
 
                 // Stop timer
                 runTimer = false;
@@ -198,6 +199,12 @@ public class GameStateManager : MonoBehaviour
                 StartCoroutine(RestartGame(1f));    // Wait 1 second before restarting game
             }
         }
+    }
+
+    private void EnableGameOverScreen(bool winState)
+    {
+        gameOverScreen.gameObject.SetActive(true);
+        gameOverScreen.SetWinState(winState);
     }
 
     private IEnumerator RestartGame(float seconds)
