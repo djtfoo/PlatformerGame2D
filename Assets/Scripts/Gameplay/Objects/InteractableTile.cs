@@ -11,6 +11,9 @@ public class InteractableTile : Tile
 
     [SerializeField] private Transform tileSprite;
 
+    [SerializeField] private float yTranslateBy = 0.035f;
+    [SerializeField] private float yTranslateSpeed = 0.4f;
+
     void OnCollisionEnter2D(Collision2D col)
     {
         // check if collision is with player
@@ -48,20 +51,25 @@ public class InteractableTile : Tile
 
     protected IEnumerator ShakeTile()
     {
-        float yTranslateBy = 0.015f;
-        float yTranslateSpeed = 0.25f;
-        while (tileSprite.localPosition.y < yTranslateBy)
+        Vector3 initialPos = tileSprite.position;
+        float offsetY = 0f;
+
+        while (offsetY < yTranslateBy)
         {
-            tileSprite.localPosition += new Vector3(0f, yTranslateSpeed * Time.deltaTime, 0f);
-            if (tileSprite.localPosition.y > yTranslateBy)
-                tileSprite.localPosition = new Vector3(tileSprite.localPosition.x, yTranslateBy, 0f);
+            offsetY += yTranslateSpeed * Time.deltaTime;
+            if (offsetY > yTranslateBy)
+                offsetY = yTranslateBy;
+
+            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);
             yield return null;
         }
-        while (tileSprite.localPosition.y > 0f)
+        while (offsetY > 0f)
         {
-            tileSprite.localPosition -= new Vector3(0f, yTranslateSpeed * Time.deltaTime, 0f);
-            if (tileSprite.localPosition.y < 0f)
-                tileSprite.localPosition = new Vector3(tileSprite.localPosition.x, 0f, 0f);
+            offsetY -= yTranslateSpeed * Time.deltaTime;
+            if (offsetY < 0f)
+                offsetY = 0f;
+
+            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);
             yield return null;
         }
     }

@@ -40,3 +40,11 @@ MonoBehaviour:
     obj: {fileID: 593962164951455794, guid: d45f8b9c09a2474439595f3e8ae88b16, type: 3}
     sizeX: 1
     sizeY: 1
+  - id: 71
+    obj: {fileID: 5601989022120511238, guid: 7a787f4b2a19462498b9a5ac6b0d51ce, type: 3}
+    sizeX: 1
+    sizeY: 1
+  - id: 80
+    obj: {fileID: 7018392158830104515, guid: 5f88ce4a6822e85499c4316750c60f43, type: 3}
+    sizeX: 1
+    sizeY: 1
