@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameStateManager : MonoBehaviour
 
     // Game State Variables
     [Header("Game Variables")]
+    [Range(1, 99)]
     [SerializeField]
     private int numLivesPerPlayer = 3;
 
@@ -24,6 +26,9 @@ public class GameStateManager : MonoBehaviour
     [Header("Game Initializers")]
     [SerializeField] private MapLoader mapLoader;
 
+    [Header("Game Screens")]
+    [SerializeField] private GameObject gameOverScreen;
+
     // Timer
     private float gameTimer = 0f;
     public float GameTimer
@@ -31,6 +36,7 @@ public class GameStateManager : MonoBehaviour
         get { return gameTimer; }
     }
     private bool runTimer = false;
+    private bool waitForRestart = true;
 
     [Header("Timer")]
     [SerializeField] private UnityEvent onTimerUpdated;
@@ -47,6 +53,9 @@ public class GameStateManager : MonoBehaviour
             // else, assign this as the GameStateManager singleton
             instance = this;
         }
+
+        // Disable game over screen
+        gameOverScreen.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -56,6 +65,20 @@ public class GameStateManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        // Check for 'restart' button
+        if (waitForRestart)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                // Reload scene
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+    }
+
+    // Update is called once per frame, after Update
     void LateUpdate()
     {
         if (runTimer)
@@ -131,10 +154,14 @@ public class GameStateManager : MonoBehaviour
             if (gameOver)
             {
                 Debug.Log("Game Over");
-
-                runTimer = false;
                 // Show 'game over' screen
+                gameOverScreen.SetActive(true);
 
+                // Stop timer
+                runTimer = false;
+
+                // Set waiting for user input to restart
+                waitForRestart = true;
             }
             // else, restart game
             else
