@@ -813,6 +813,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &566689561
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 871222498}
+    m_Modifications:
+    - target: {fileID: 136714, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_Name
+      value: AudioPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 173.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 316.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11496652, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+--- !u!114 &566689562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11464310, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+  m_PrefabInstance: {fileID: 566689561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933527d0c066e834d9124c07102d8092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &566689563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 458030, guid: b5061ab8e506ef7479cf4644d1748679, type: 3}
+  m_PrefabInstance: {fileID: 566689561}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &625427957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1315,10 @@ Transform:
   m_LocalPosition: {x: 3.68, y: -7.6, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1126050387}
+  - {fileID: 566689563}
+  - {fileID: 1552859107}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1294,6 +1371,34 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 60
     maxNormalAngle: 120
+  onJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 566689562}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Jump
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1552859108}
+        m_TargetAssemblyTypeName: SpawnAnimatedObject, Assembly-CSharp
+        m_MethodName: SpawnObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SmokeJump
+          m_BoolArgument: 0
+        m_CallState: 2
+  onWalkVFX: {fileID: 1126050388}
 --- !u!114 &871222501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2151,6 +2256,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113330617}
   m_CullTransparentMesh: 1
+--- !u!1 &1126050386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126050387}
+  - component: {fileID: 1126050388}
+  m_Layer: 0
+  m_Name: Smoke_Walk_Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1126050387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126050386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.162, y: -0.016, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871222498}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1126050388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126050386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfb08089dfdfa8429f7e6787f434be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnAnimComplete: 1
+  delay: 0
+  animatedObjectPrefab: {fileID: 963895846287275115, guid: 27078849c40cf7b40b5edf185fd4af98, type: 3}
+  offsetSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1201713014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2556,6 +2709,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -85}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1552859106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552859107}
+  - component: {fileID: 1552859108}
+  m_Layer: 0
+  m_Name: Smoke_Jump_Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1552859107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552859106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.011, y: -0.062, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871222498}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552859108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552859106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfb08089dfdfa8429f7e6787f434be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnAnimComplete: 1
+  delay: 0
+  animatedObjectPrefab: {fileID: 9078331809507778611, guid: 6a46d2fb72d27f94596440294cff3650, type: 3}
+  offsetSpawnPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1676326015
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,22 +10,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Control Variables")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 20f;
 
+    [Header("Contact Filters")]
     [SerializeField] ContactFilter2D groundContactFilter;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent onJump;
 
     private Vector3 localScale;
     private Rigidbody2D rb;
 
     private float horizontalMovement = 0f;
+    private float prevHorizontalMovement = 0f;
     private bool justJumped = false;
 
     private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,17 +55,18 @@ public class PlayerControl : MonoBehaviour
             justJumped = true;
         }
 
-        // Flip sprite
-        if (horizontalMovement < 0f)
-            transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
-        else if (horizontalMovement > 0f)
-            transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
-    }
+        // Check for change in walk state if change in Input occurs
+        if (prevHorizontalMovement != horizontalMovement)
+        {
+            // Flip sprite
+            if (horizontalMovement < 0f)
+                transform.localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
+            else if (horizontalMovement > 0f)
+                transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
+        }
 
-    private void FixedUpdate()
-    {
-        // if player started moving, set 'Walk' animation to true
-        if (horizontalMovement != 0f)
+        // if player is walking on the ground, set 'Walk' animation to true
+        if (horizontalMovement != 0f && IsOnGround())
         {
             if (animator != null) animator.SetBool("Walk", true);
         }
@@ -67,6 +76,12 @@ public class PlayerControl : MonoBehaviour
             if (animator != null) animator.SetBool("Walk", false);
         }
 
+        // assign current to prev for next frame check
+        prevHorizontalMovement = horizontalMovement;
+    }
+
+    private void FixedUpdate()
+    {
         // Move
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
 
@@ -77,8 +92,8 @@ public class PlayerControl : MonoBehaviour
             justJumped = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-            // Play SFX
-            AudioManager.instance.PlaySFX("Jump");
+            // Trigger events on Jump
+            onJump.Invoke();
         }
     }
 
