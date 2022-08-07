@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+[RequireComponent(typeof(PlayerControl))]
+public class PlayerState : MonoBehaviour
 {
     private int score = 0;
     public int Score
@@ -20,6 +21,12 @@ public class Player : MonoBehaviour
     public bool IsDead
     {
         get { return isDead; }
+    }
+
+    private bool hasWon = false;
+    public bool HasWon
+    {
+        get { return hasWon; }
     }
 
     [Header("Events")]
@@ -42,6 +49,10 @@ public class Player : MonoBehaviour
     {
         SetScore(0);
         isDead = false;
+
+        // Enable user input and rigidbody
+        GetComponent<PlayerControl>().EnableUserInput(true);
+        GetComponent<PlayerControl>().EnableRigidbody(true);
     }
 
     public void SetPlayerDead()
@@ -53,7 +64,23 @@ public class Player : MonoBehaviour
         SetNumLives(numLives - 1);
 
         // Update GameStateManager
-        GameStateManager.Instance.UpdatePlayerDeaths();
+        GameStateManager.Instance.UpdateGameState();
+
+        // Disable user input and rigidbody
+        GetComponent<PlayerControl>().EnableUserInput(false);
+        GetComponent<PlayerControl>().EnableRigidbody(false);
+    }
+
+    public void SetPlayerWon()
+    {
+        // Set Player win
+        hasWon = true;
+
+        // Update GameStateManager
+        GameStateManager.Instance.UpdateGameState();
+
+        // Disable user input
+        GetComponent<PlayerControl>().EnableUserInput(false);
     }
 
     public void IncrementScore(int gain)

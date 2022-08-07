@@ -14,7 +14,7 @@ public class UI_PlayerScore : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateScoreText(Player player)
+    public void UpdateScoreText(PlayerState player)
     {
         // Update text
         textObject.text = string.Format("{0}", player.Score.ToString("000000"));

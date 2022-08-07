@@ -20,7 +20,11 @@ public class GameStateManager : MonoBehaviour
     private int numLivesPerPlayer = 3;
 
     [Header("Object References")]
-    [SerializeField] private Player[] players;  // Reference(s) to Player object
+    [SerializeField] private PlayerState[] players;  // Reference(s) to Player object
+    public PlayerState[] Players
+    {
+        get { return players; }
+    }
 
     // Game State
     [Header("Game Initializers")]
@@ -30,8 +34,8 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
 
     // Timer
-    private float gameTimer = 0f;
-    public float GameTimer
+    private double gameTimer = 0f;
+    public double GameTimer
     {
         get { return gameTimer; }
     }
@@ -96,7 +100,7 @@ public class GameStateManager : MonoBehaviour
     private void InitGame()
     {
         // Initialize Player stats
-        foreach (Player player in players)
+        foreach (PlayerState player in players)
             player.InitPlayer(numLivesPerPlayer);
 
         // Start the game
@@ -109,7 +113,7 @@ public class GameStateManager : MonoBehaviour
     public void StartGame()
     {
         // Reset Player stats
-        foreach (Player player in players)
+        foreach (PlayerState player in players)
             player.ResetPlayer();
 
         // Re-initialize map and objects
@@ -121,13 +125,36 @@ public class GameStateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when a Player dies to check for all Player deaths.
+    /// Called when a Player dies or wins to check for all Player deaths.
     /// </summary>
-    public void UpdatePlayerDeaths()
+    public void UpdateGameState()
     {
-        // Check for player death
+        /// TODO: specific logic TBD, as from a game design perspective not sure if all players would be required to win (i.e. any deaths => restart game)
+        /// Currently, logic is: if 1 player has won, the level is won
+        /// Game is lost only if all players have died
+
+        // Check if a player has won
+        bool playerWon = false;
+        foreach (PlayerState player in players)
+        {
+            if (player.HasWon)
+            {
+                playerWon = true;
+                break;
+            }
+        }
+
+        if (playerWon)
+        {
+            // Show game win screen
+            Debug.Log("You Won!");
+
+            return;
+        }
+
+        // Otherwise, check for player death
         bool playersDead = true;
-        foreach (Player player in players)
+        foreach (PlayerState player in players)
         {
             if (!player.IsDead)
             {
@@ -139,9 +166,11 @@ public class GameStateManager : MonoBehaviour
         // If all players are dead, restart game
         if (playersDead)
         {
+            Debug.Log("All Players Died");
+
             // Check if the game is over, i.e. all players have 0 lives left
             bool gameOver = true;
-            foreach (Player player in players)
+            foreach (PlayerState player in players)
             {
                 if (player.NumLives > 0)
                 {

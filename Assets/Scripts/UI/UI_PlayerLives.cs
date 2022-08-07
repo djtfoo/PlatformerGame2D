@@ -14,7 +14,7 @@ public class UI_PlayerLives : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateLivesText(Player player)
+    public void UpdateLivesText(PlayerState player)
     {
         // Update text
         textObject.text = string.Format("X{0}", player.NumLives);

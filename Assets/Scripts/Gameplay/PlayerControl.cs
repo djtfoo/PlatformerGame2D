@@ -27,16 +27,27 @@ public class PlayerControl : MonoBehaviour
 
     private Vector3 localScale;
     private Rigidbody2D rb;
+    private Animator animator;
 
     private float horizontalMovement = 0f;
     private float prevHorizontalMovement = 0f;
     private bool justJumped = false;
 
-    private Animator animator;
+    private bool userInput = true;
 
+
+    public void EnableUserInput(bool enabled)
+    {
+        userInput = enabled;
+    }
+
+    public void EnableRigidbody(bool enabled)
+    {
+        rb.simulated = enabled;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         localScale = transform.localScale;
@@ -44,8 +55,7 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CheckForUserInput()
     {
         // Process Keys
         horizontalMovement = Input.GetAxisRaw("Horizontal");
@@ -54,6 +64,14 @@ public class PlayerControl : MonoBehaviour
         {
             justJumped = true;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        horizontalMovement = 0f;
+        if (userInput)
+            CheckForUserInput();
 
         // Check for change in walk state if change in Input occurs
         if (prevHorizontalMovement != horizontalMovement)
@@ -100,14 +118,5 @@ public class PlayerControl : MonoBehaviour
     private bool IsOnGround()
     {
         return rb.IsTouching(groundContactFilter);
-    }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "DeathTrigger")
-        {
-            // Disable player movement
-            rb.simulated = false;
-        }
     }
 }

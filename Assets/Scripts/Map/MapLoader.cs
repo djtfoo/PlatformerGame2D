@@ -24,7 +24,7 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private GameObject floor;
 
     [Header("Gameplay Objects")]
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerState player;
     [SerializeField] private CameraController camera;
 
     private Vector3 playerSpawnPos;

@@ -10,7 +10,7 @@ public class GainPoints : Effect
 
     public override void TriggerEffect(Collider2D col)
     {
-        Player player = col.gameObject.GetComponent<Player>();
+        PlayerState player = col.gameObject.GetComponent<PlayerState>();
         if (player != null)
             player.IncrementScore(pointsGain);
         else

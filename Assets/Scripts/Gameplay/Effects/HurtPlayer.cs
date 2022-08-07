@@ -8,7 +8,7 @@ public class HurtPlayer : Effect
     {
         Debug.Log("Player got hurt");
 
-        Player player = col.gameObject.GetComponent<Player>();
+        PlayerState player = col.gameObject.GetComponent<PlayerState>();
         if (player != null)
             player.SetPlayerDead();
         else
