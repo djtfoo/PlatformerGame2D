@@ -48,3 +48,7 @@ MonoBehaviour:
     obj: {fileID: 7018392158830104515, guid: 5f88ce4a6822e85499c4316750c60f43, type: 3}
     sizeX: 1
     sizeY: 1
+  - id: 83
+    obj: {fileID: 5350309490946876592, guid: b90e9f204bc97084192f89727b56c422, type: 3}
+    sizeX: 1
+    sizeY: 1

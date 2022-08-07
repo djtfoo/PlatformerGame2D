@@ -634,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &550278971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,7 +751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8462c06dd54d2ba478ad2e1491416c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animBoolVar: YouWin
+  winTrigger: Win
+  loseTrigger: Lose
 --- !u!1 &555052870
 GameObject:
   m_ObjectHideFlags: 0
