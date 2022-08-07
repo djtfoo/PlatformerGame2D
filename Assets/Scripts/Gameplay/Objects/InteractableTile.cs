@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class InteractableTile : Tile
@@ -14,8 +15,14 @@ public class InteractableTile : Tile
     [SerializeField] private float yTranslateBy = 0.035f;
     [SerializeField] private float yTranslateSpeed = 0.4f;
 
+    [SerializeField] private int numInteractionsLeft = 1;
+    [SerializeField] private UnityEvent onInteractivityEnded;
+
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (numInteractionsLeft <= 0)   // tile no longer interactable
+            return;
+
         // check if collision is with player
         if (col.gameObject.tag == "Player")
         {
@@ -26,9 +33,13 @@ public class InteractableTile : Tile
                 TriggerHitEffect(col);
                 // Feedback of tile being hit
                 OnHitFeedback();
+
+                // reduce interactions
+                numInteractionsLeft -= 1;
+                if (numInteractionsLeft == 0)
+                    onInteractivityEnded.Invoke();
             }
         }
-
     }
 
     // Tile effect to trigger if player hits the tile

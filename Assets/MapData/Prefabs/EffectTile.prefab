@@ -140,6 +140,22 @@ MonoBehaviour:
   tileSprite: {fileID: 5601989022120511241}
   yTranslateBy: 0.035
   yTranslateSpeed: 0.4
+  numInteractionsLeft: 1
+  onInteractivityEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5601989022120511244}
+        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1477956926, guid: 36b68147452d6a44c8da3cf6fbee24e8, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5601989022120511240
 MonoBehaviour:
   m_ObjectHideFlags: 0
