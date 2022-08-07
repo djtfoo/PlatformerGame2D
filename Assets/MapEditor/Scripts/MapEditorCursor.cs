@@ -15,7 +15,7 @@ public class MapEditorCursor : MonoBehaviour
     [SerializeField] private float panSpeed = 0.5f;
 
     private bool isPanning = false;
-    [SerializeField] private char selectedId = '\0';    // id of selected Object
+    private char selectedId = '\0';    // id of selected Object
     private int selectedSizeX = 0;    // sizeX of selected Object
     private int selectedSizeY = 0;    // sizeY of selected Object
     private Vector2Int gridCoord = Vector2Int.zero;

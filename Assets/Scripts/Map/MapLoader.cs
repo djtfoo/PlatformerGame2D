@@ -5,15 +5,15 @@
  * Generate the map of the level from a text file.
  */
 
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    [Header("Map Assets")]
-    // temp variable for testing
-    [SerializeField] private TextAsset tempLevelData;
+    [Header("Map Data")]
+    [SerializeField] private string assetToLoad = "/Maps/ToLoad.txt";
 
     [Header("Other Map Objects")]
     [SerializeField] private GameObject floor;
@@ -26,7 +26,9 @@ public class MapLoader : MonoBehaviour
     private Vector3 cameraInitPos;
 
     // Other Variables
-    private bool firstTime; // whether it is the first time a map is being loaded
+    private bool firstTime = true; // whether it is the first time a map is being loaded
+
+    private string mapData;
 
     void Awake()
     {
@@ -37,6 +39,17 @@ public class MapLoader : MonoBehaviour
         // Get camera's initial position
         // (Should be a point set dependent on the player's spawn point)
         cameraInitPos = camera.transform.position;
+
+        // Load TextAsset from Resources folder
+        string pathFile = Application.dataPath + "/StreamingAssets/" + assetToLoad;
+        Debug.Log(pathFile);
+        if (File.Exists(pathFile))
+        {
+            string fileToLoad = File.ReadAllText(pathFile);
+            Debug.Log(fileToLoad);
+            string pathFileToLoad = Application.dataPath + "/StreamingAssets/" + fileToLoad;
+            mapData = File.ReadAllText(pathFileToLoad);
+        }
     }
 
     public void LoadMap()
@@ -53,7 +66,7 @@ public class MapLoader : MonoBehaviour
         }
 
         // Generate the map
-        GenerateMap(tempLevelData.text);
+        GenerateMap(mapData);
 
         // Set Player at player spawn position
         player.transform.position = playerSpawnPos;

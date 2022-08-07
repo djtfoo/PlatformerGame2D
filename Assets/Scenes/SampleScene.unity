@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39f9b8808108f64a92826d559d2af82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempLevelData: {fileID: 4900000, guid: 76072c2e1fdfb78408c53fd17c1f6a23, type: 3}
+  assetToLoad: /Maps/ToLoad.txt
   floor: {fileID: 221444742}
   player: {fileID: 871222501}
   camera: {fileID: 519420033}

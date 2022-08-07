@@ -1,10 +1,9 @@
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
-
 
 public class MapEditor : MonoBehaviour
 {
@@ -16,8 +15,7 @@ public class MapEditor : MonoBehaviour
 
     [Header("Create New Map File")]
     [Tooltip("Assign a map to edit it, leave it empty to create new map")]
-    [SerializeField] private TextAsset mapDataFile;
-    [SerializeField] private string assetFilePath = "Assets/Maps/test.txt";
+    [SerializeField] private string mapFilePath = "/Maps/test.txt";
 
     [Header("Map Editor Interface")]
     [SerializeField] private Transform selectionBox;
@@ -32,13 +30,19 @@ public class MapEditor : MonoBehaviour
     {
         objectOccupancy = new Dictionary<Vector2Int, GameObject>();
 
-        if (mapDataFile != null)
+        try
         {
             // Obtain map data from CSV
-            mapData = MapParser.ParseMapData(mapDataFile.text);
+            string filepath = Application.dataPath + "/StreamingAssets/" + mapFilePath;
+            string data = File.ReadAllText(filepath);
+
+            mapData = MapParser.ParseMapData(data);
         }
-        else
+        catch (Exception e)
         {
+            Debug.LogWarning(mapFilePath + " is invalid.");
+
+            // create empty map
             int mapHeight = globalMapDataSO.mapHeight;
             mapData = new char[mapHeight, mapWidth];
             for (int i = 0; i < mapHeight; i++)
@@ -86,20 +90,9 @@ public class MapEditor : MonoBehaviour
         string serializedData = MapParser.SerializeMapData(mapData);
 
         // Write to map file
-        if (mapDataFile != null)    // TextAsset was assigned
-        {
-            File.WriteAllText(AssetDatabase.GetAssetPath(mapDataFile), serializedData);
-            EditorUtility.SetDirty(mapDataFile);
-        }
-        else    // create new text file
-        {
-            using (StreamWriter outfile = new StreamWriter(assetFilePath))
-            {
-                outfile.Write(serializedData);
-            }
-        }
+        string filepath = Application.dataPath + "/StreamingAssets/" + mapFilePath;
+        File.WriteAllText(filepath, serializedData);
 
-        AssetDatabase.Refresh();
         Debug.Log("Saved successfully.");
     }
 }
