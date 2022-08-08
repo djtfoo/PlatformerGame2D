@@ -959,10 +959,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ff48b3fae747c4f9935caa7ef4e35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 0
+  mapWidth: 50
   globalMapDataSO: {fileID: 11400000, guid: 847f2abb7c6f3b64e9a8d7041c66e17a, type: 2}
-  mapDataFile: {fileID: 0}
-  assetFilePath: Assets/StreamingAssets/Maps/test.txt
+  mapFilePath: /Maps/test.txt
   selectionBox: {fileID: 358861564}
   selectionItem: {fileID: 1610572923}
 --- !u!114 &1198145953
@@ -995,7 +994,6 @@ MonoBehaviour:
   mapEditor: {fileID: 1198145952}
   scrollSpeed: 2
   panSpeed: 0.5
-  selectedId: 0
 --- !u!1 &1220196259
 GameObject:
   m_ObjectHideFlags: 0

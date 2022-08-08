@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class MapEditor : MonoBehaviour
 {
     [Tooltip("Width in no. of grids for creating new maps")]
-    [SerializeField] private int mapWidth;
+    [Range(1, 100)]
+    [SerializeField] private int mapWidth = 20;
 
     // Global Map Data
     [SerializeField] private GlobalMapData globalMapDataSO;
@@ -32,7 +33,7 @@ public class MapEditor : MonoBehaviour
 
         try
         {
-            // Obtain map data from CSV
+            // Obtain map data from text file
             string filepath = Application.dataPath + "/StreamingAssets/" + mapFilePath;
             string data = File.ReadAllText(filepath);
 
@@ -49,26 +50,28 @@ public class MapEditor : MonoBehaviour
                 for (int j = 0; j < mapWidth; j++)
                     mapData[i, j] = '0';
         }
-
-        // Generate map data
-        MapGenerator.Instance.GenerateMap(mapData, transform, true, objectOccupancy);
-
-        // Generate object selection list
-        foreach (ObjectData data in MapGenerator.Instance.GlobalMapDataSO.objectData)
+        finally
         {
-            // Create selection item
-            MapObjectSelector item = Instantiate(selectionItem, selectionBox);
-            item.gameObject.SetActive(true);
-            // get sprite
-            SpriteRenderer sr = data.obj.GetComponentInChildren(typeof(SpriteRenderer)) as SpriteRenderer;
-            if (sr != null)
-                item.GetComponent<Image>().sprite = sr.sprite;
+            // Generate map data
+            MapGenerator.Instance.GenerateMap(mapData, transform, true, objectOccupancy);
 
-            // make a reference to object data
-            item.StoreObjectId(data.id);
+            // Generate object selection list
+            foreach (ObjectData data in MapGenerator.Instance.GlobalMapDataSO.objectData)
+            {
+                // Create selection item
+                MapObjectSelector item = Instantiate(selectionItem, selectionBox);
+                item.gameObject.SetActive(true);
+                // get sprite
+                SpriteRenderer sr = data.obj.GetComponentInChildren(typeof(SpriteRenderer)) as SpriteRenderer;
+                if (sr != null)
+                    item.GetComponent<Image>().sprite = sr.sprite;
+
+                // make a reference to object data
+                item.StoreObjectId(data.id);
+            }
+            // disable the default selection item
+            selectionItem.gameObject.SetActive(false);
         }
-        // disable the default selection item
-        selectionItem.gameObject.SetActive(false);
     }
 
     public void UpdateObjectOccupancy(Vector2Int gridCoord, char id)
