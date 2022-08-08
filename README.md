@@ -1,6 +1,9 @@
 # PlatformerGame2D
 A simple 2D platformer game developed in Unity 2021.3.6f1.
 
+Target platform: Windows
+Resolution: 848x480 (Windowed)
+
 ## Gameplay
 // insert GIF here!!
 
@@ -10,7 +13,7 @@ A simple 2D platformer game developed in Unity 2021.3.6f1.
 - Hit tiles from beneath for points. Some tiles are 'hidden', appearing only after being hit.
 - Avoid spikes and falling out of the map, which causes the player to lose 1 life and to restart from the beginning of the map.
 
-## Technical Features
+### Technical Features
 
 - Map loaded from text file (StreamingAssets)
 - Platformer mechanics implemented using Rigidbody2D
@@ -22,11 +25,26 @@ A simple 2D platformer game developed in Unity 2021.3.6f1.
 ## Map Editor
 // insert GIF here!!
 
-- Specify the map width and map file to load (if it does not exist) in the Map Editor Component before playing the scene.
 - Left click on an object from the top bar to select it.
 - Left click on a tile space to place it on the map.
 - Select the empty grid (top left) to erase existing tiles.
 - Click on the Save button (bottom right) to save to the file. It creates a new file if it does not exist yet.
+
+## How to Run
+
+### The Game
+
+Download the game from the Release tag.
+
+To make changes to the game or play it in the Unity Editor, launch the project in Unity 2021.3.6f1. Open SampleScene (Assets/Scenes/SampleScene.unity). The game can be built for Windows platforms.
+
+### Map Editor
+
+Launch the project in Unity 2021.3.6f1. Open MapEditorScene (Assets/MapEditor/Scenes/MapEditorScene.unity).
+
+Before playing the scene, specify the map width and map file to load (if it does not exist) in the Map Editor Component.
+
+// insert screenshot
 
 ## Credits
 
