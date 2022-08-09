@@ -1,11 +1,20 @@
 # PlatformerGame2D
 A simple 2D platformer game developed in Unity 2021.3.6f1.
 
+## Development
+
+Engine: Unity 2021.3.6f1
 Target platform: Windows
 Resolution: 848x480 (Windowed)
 
+### Documentation
+
+Read more about the code documentation <a href="./code-documentation.md">here</a>.
+
 ## Gameplay
 // insert GIF here!!
+
+### How to Play
 
 - Use the arrow keys to move and space to jump.
 - Win by reaching the checkpoint, or lose if all lives are lost.
@@ -22,29 +31,35 @@ Resolution: 848x480 (Windowed)
 - User interface for displaying game state
 - User feedback (visual, audio)
 
+### Making Changes
+
+Launch the project in Unity 2021.3.6f1.
+
+Open SampleScene (Assets/Scenes/SampleScene.unity).
+
+
+### Build
+
+The game can be built for Windows platforms.
+
+
 ## Map Editor
 // insert GIF here!!
 
-- Left click on an object from the top bar to select it.
-- Left click on a tile space to place it on the map.
-- Select the empty grid (top left) to erase existing tiles.
-- Click on the Save button (bottom right) to save to the file. It creates a new file if it does not exist yet.
-
-## How to Run
-
-### The Game
-
-Download the game from the Release tag.
-
-To make changes to the game or play it in the Unity Editor, launch the project in Unity 2021.3.6f1. Open SampleScene (Assets/Scenes/SampleScene.unity). The game can be built for Windows platforms.
-
-### Map Editor
+### How to Run
 
 Launch the project in Unity 2021.3.6f1. Open MapEditorScene (Assets/MapEditor/Scenes/MapEditorScene.unity).
 
 Before playing the scene, specify the map width and map file to load (if it does not exist) in the Map Editor Component.
 
 // insert screenshot
+
+Controls:
+- Left click on an object from the top bar to select it.
+- Left click on a tile space to place it on the map.
+- Select the empty grid (top left) to erase existing tiles.
+
+Click on the Save button (bottom right) to save to the file. It creates a new file if it does not exist yet.
 
 ## Credits
 
