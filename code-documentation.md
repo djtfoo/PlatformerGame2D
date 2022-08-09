@@ -44,7 +44,7 @@ A child object with a `BoxCollider2D` is attached to the camera and placed outsi
 
 ![Object Class Diagram](images/class-diagram.png?raw=true "Class Diagram")
 
-All instantiated non-player entities in the game are derived from the `Object` MonoBehaviour abstract class. There are 4 (only 3 implemented thus far) types of `Objects`:
+All instantiated non-player entities in the game are derived from the `MapObject` MonoBehaviour abstract class. There are 4 (only 3 implemented thus far) types of `MapObjects`:
 1. `Tile`: A collidable object which blocks the player's movement, thus acts as walkable platforms or obstructions.
 2. `Consumable`: A trigger-collidable object which triggers `Effects` when the player comes into contact with it. The naming does not reflect that the Object is necessarily destroyed after its effect is triggered.
 3. `WinGameObject`: An object which provides a win condition. There is only one implemented example, `Checkpoint`.
@@ -57,7 +57,7 @@ The behaviour of `InteractableTile` and `Consumable` objects can be customised b
 1. `AppearOnHit`: Disables a target `SpriteRenderer` until this `Effect` is triggered. Used by the 'Invisible Tile' in the demo.
 2. `GainPoints`: Increases the Player's `score` by a variable amount. Used by the 'Cherry' in the demo.
 3. `HurtPlayer`: Reduces the Player's life by 1 and triggers their death. Used by the 'Spike' in the demo.
-4. `DestroyObject`: Destroys the `Object` after triggering the `Effect`. Used by the 'Cherry' `Consumable` in the demo.
+4. `DestroyObject`: Destroys the `MapObject` after triggering the `Effect`. Used by the 'Cherry' `Consumable` in the demo.
 
 ## GameStateManager
 
@@ -85,16 +85,16 @@ GameStateManager.Instance
 
 A single `ObjectData` consists of:
 - `id`: character to represent the Object in the map data
-- `obj`: reference to the `Object` Prefab for instantiating new instances
+- `obj`: reference to the `MapObject` Prefab for instantiating new instances
 - `sizeX`: the width of the sprite in terms of number of grids
 - `sizeY`: the height of the sprite in terms of number of grids
 
 ### Map Data
 
-The map consists of a series of grids, with an `Object` (or none) occupying a grid. This grid occupancy represents the map, and is represented as a 2-dimensional character array that is stored in a text file in `StreamingAssets`.
+The map consists of a series of grids, with an `MapObject` (or none) occupying a grid. This grid occupancy represents the map, and is represented as a 2-dimensional character array that is stored in a text file in `StreamingAssets`.
 
 ![Example of the map data](images/mapdata-example.png?raw=true "Map data represented in 2d array")
 
-Each grid is represented by the `id` of the `Object` that resides in it, or '0' if the grid is unoccupied. Every Object only occupies one grid regardless of the size of the sprite. Thus, an Object could visually look like it occupies more than one grid. For Objects that are visually larger than a single grid, its position is snapped to the bottom of the grid.
+Each grid is represented by the `id` of the `MapObject` that resides in it, or '0' if the grid is unoccupied. Every Object only occupies one grid regardless of the size of the sprite. Thus, an Object could visually look like it occupies more than one grid. For Objects that are visually larger than a single grid, its position is snapped to the bottom of the grid.
 
 In the Map Editor, the `MapEditor` Component maintains a copy of this character array, and updates it when an Object is added or removed from a grid. When saving edited maps, this maintained character array is written to the specified file path.

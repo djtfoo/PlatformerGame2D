@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumable : Object
+public class Consumable : MapObject
 {
     [SerializeField] private Effect[] triggerEffects;
 

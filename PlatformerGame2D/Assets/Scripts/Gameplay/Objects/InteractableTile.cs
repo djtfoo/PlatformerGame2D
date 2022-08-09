@@ -82,25 +82,30 @@ public class InteractableTile : Tile
     /// </summary>
     protected IEnumerator ShakeTile()
     {
+        // save the initial position of the sprite
         Vector3 initialPos = tileSprite.position;
         float offsetY = 0f;
 
+        // move the sprite upwards
         while (offsetY < yTranslateBy)
         {
+            // calculate the updated offset
             offsetY += yTranslateSpeed * Time.deltaTime;
             if (offsetY > yTranslateBy)
                 offsetY = yTranslateBy;
 
-            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);
+            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);    // update the sprite position
             yield return null;
         }
+        // move the sprite back downwards to its original position
         while (offsetY > 0f)
         {
+            // calculate the updated offset
             offsetY -= yTranslateSpeed * Time.deltaTime;
             if (offsetY < 0f)
                 offsetY = 0f;
 
-            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);
+            tileSprite.position = initialPos + new Vector3(0f, offsetY, 0f);    // update the sprite position
             yield return null;
         }
     }
