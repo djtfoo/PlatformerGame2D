@@ -3,16 +3,14 @@ A simple 2D platformer game developed in Unity 2021.3.6f1.
 
 ## Development
 
-Engine: Unity 2021.3.6f1
-Target platform: Windows
+Engine: Unity 2021.3.6f1<br>
+Target platform: Windows<br>
 Resolution: 848x480 (Windowed)
-
-### Documentation
 
 Read more about the code documentation <a href="./code-documentation.md">here</a>.
 
 ## Gameplay
-// insert GIF here!!
+![Gameplay Demo](./images/game-demo.gif)
 
 ### How to Play
 
@@ -37,14 +35,13 @@ Launch the project in Unity 2021.3.6f1.
 
 Open SampleScene (Assets/Scenes/SampleScene.unity).
 
-
 ### Build
 
 The game can be built for Windows platforms.
 
 
 ## Map Editor
-// insert GIF here!!
+![Gameplay Demo](./images/editor-demo.gif)
 
 ### How to Run
 
@@ -52,7 +49,7 @@ Launch the project in Unity 2021.3.6f1. Open MapEditorScene (Assets/MapEditor/Sc
 
 Before playing the scene, specify the map width and map file to load (if it does not exist) in the Map Editor Component.
 
-// insert screenshot
+![Gameplay Demo](./images/map-editor-script.png)
 
 Controls:
 - Left click on an object from the top bar to select it.
