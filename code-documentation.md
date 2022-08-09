@@ -54,35 +54,47 @@ All instantiated non-player entities in the game are derived from the `Object` M
 ### Effect
 
 The behaviour of `InteractableTile` and `Consumable` objects can be customised by triggering 1 or more `Effects`. `Effect` is a MonoBehaviour class with an abstract function, `TriggerEffect(Collision2D)`. The following `Effects` have been implemented thus far:
-1. AppearOnHit: Disables a target `SpriteRenderer` until this `Effect` is triggered. Used by the 'Invisible Tile' in the demo.
-2. GainPoints: Increases the Player's `score` by a variable amount. Used by the 'Cherry' in the demo.
-3. HurtPlayer: Reduces the Player's life by 1 and triggers their death. Used by the 'Spike' in the demo.
+1. `AppearOnHit`: Disables a target `SpriteRenderer` until this `Effect` is triggered. Used by the 'Invisible Tile' in the demo.
+2. `GainPoints`: Increases the Player's `score` by a variable amount. Used by the 'Cherry' in the demo.
+3. `HurtPlayer`: Reduces the Player's life by 1 and triggers their death. Used by the 'Spike' in the demo.
 4. `DestroyObject`: Destroys the `Object` after triggering the `Effect`. Used by the 'Cherry' `Consumable` in the demo.
 
 ## GameStateManager
 
-The `GameStateManager` tracks the overall state of the game, and triggers the game over screen when the player(s) have won or lost the game. As there can only be one `GameStateManager`, it is a singleton, and exposed game state information can be accessed by other classes.
+The `GameStateManager` tracks the overall state of the game, and triggers the game over screen when the player(s) have won or lost the game.
+
+Some game state information is exposed and can be accessed by other classes. As there can only be one `GameStateManager`, it is a singleton.
+
+Other classes can access the `GameStateManager` singleton object via:
+
+```
+GameStateManager.Instance
+```
 
 ## Map
 
 ### Global Map Data
 
-A Unity ScriptableObject is used to store the shared map information:
-- The map height (side-scrolling only, not vertically)
-- The object/tile set for generating the map
+![GlobalMapData ScriptableObject](images/global-map-data-so.png?raw=true "GlobalMapData")
 
-A single ObjectData consists of:
-- reference to the Object Prefab
-- size X, Y of the Object sprite (in terms of no. grids)
+`GlobalMapData` is a ScriptableObject to save shared map information used by the game and map editor.
+- `gridXSize`: the width of a single grid object, in Unity's coordinate system
+- `gridYSize`: the height of a single grid object, in Unity's coordinate system
+- `mapHeight`: the fixed map height for all maps in terrms of number of grids
+- `objectData`: the object/tile set for generating the map
 
-### Map Generation
+A single `ObjectData` consists of:
+- `id`: character to represent the Object in the map data
+- `obj`: reference to the `Object` Prefab for instantiating new instances
+- `sizeX`: the width of the sprite in terms of number of grids
+- `sizeY`: the height of the sprite in terms of number of grids
 
-The map data is loaded from a text file.
+### Map Data
 
-Each grid consists of an Object. If the grid is unoccupied, it is '0'. Every Object only occupies the space of one grid regardless of the size of the sprite. Thus, an Object could visually look like it occupies more than one grid. For Objects that are visually larger than a single grid, its position is snapped to the bottom of the grid.
+The map consists of a series of grids, with an `Object` (or none) occupying a grid. This grid occupancy represents the map, and is represented as a 2-dimensional character array that is stored in a text file.
 
-### Map Editor
+![Example of the map data](images/mapdata-example.png?raw=true "Map data represented in 2d array")
 
-The Map Editor stores an occupancy grid as a 2-dimensional character array. When an Object is added or removed from a grid, the occupancy grid is updated.
+Each grid is represented by the `id` of the `Object` that resides in it, or '0' if the grid is unoccupied. Every Object only occupies one grid regardless of the size of the sprite. Thus, an Object could visually look like it occupies more than one grid. For Objects that are visually larger than a single grid, its position is snapped to the bottom of the grid.
 
-On saving, the occupancy grid is written to a text file.
+In the Map Editor, the `MapEditor` Component maintains a copy of this character array, and updates it when an Object is added or removed from a grid. When saving edited maps, this maintained character array is written to the specified file path.
