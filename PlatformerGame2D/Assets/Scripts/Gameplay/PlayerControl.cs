@@ -60,7 +60,7 @@ public class PlayerControl : MonoBehaviour
         // Process Keys
         horizontalMovement = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsOnGround())
+        if (Input.GetButtonDown("Jump") && IsOnGround())
         {
             justJumped = true;
         }
