@@ -1,3 +1,9 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: MapEditor
+ * Loads and stores the occupancy grid of a map, and allows it to be saved to a text file in StreamingAssets.
+ */
 using System;
 using System.IO;
 using System.Collections;
@@ -74,6 +80,11 @@ public class MapEditor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the Object occupancy grid.
+    /// </summary>
+    /// <param name="gridCoord">The grid coordinate with the change applied</param>
+    /// <param name="id">The id assigned to the grid</param>
     public void UpdateObjectOccupancy(Vector2Int gridCoord, char id)
     {
         // If object already exists, destroy it
@@ -87,6 +98,9 @@ public class MapEditor : MonoBehaviour
         mapData[gridCoord.y, gridCoord.x] = id;
     }
 
+    /// <summary>
+    /// Write the current map occupancy grid to a filepath in StreamingAssets.
+    /// </summary>
     public void SaveMap()
     {
         // Serialize mapData as text data

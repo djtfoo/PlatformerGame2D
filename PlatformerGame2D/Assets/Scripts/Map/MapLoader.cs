@@ -2,7 +2,7 @@
  * Created: 6 Aug 2022
  * 
  * Class: MapLoader
- * Generate the map of the level from a text file.
+ * Loads the map for the game when starting or reloading the game, and places the Player and Camera in the correct position.
  */
 
 using System.IO;
@@ -52,6 +52,9 @@ public class MapLoader : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wrapper method to create a map and set the player and camera objects in place.
+    /// </summary>
     public void LoadMap()
     {
         // if not the first time loading the map, destroy entities

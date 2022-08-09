@@ -1,3 +1,9 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: MapEditorCursor
+ * Defines the behaviour of user controls and the cursor in the Map Editor scene.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +32,7 @@ public class MapEditorCursor : MonoBehaviour
     void Update()
     {
         // User controls
-        GetUserInput();
+        GetUserControlInput();
 
         // Detect position of cursor in world space when not panning
         if (isPanning || selectedId == '\0')
@@ -68,7 +74,10 @@ public class MapEditorCursor : MonoBehaviour
         }
     }
 
-    private void GetUserInput()
+    /// <summary>
+    /// Wrapper function for reading user mouse input for navigating the Map Editor (zooming, panning).
+    /// </summary>
+    private void GetUserControlInput()
     {
         // Zoom in/out scroll
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -95,6 +104,9 @@ public class MapEditorCursor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for user mouse button for applying an Object/Tile to a grid.
+    /// </summary>
     private void PaintTile()
     {
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())    // paint tile
@@ -104,6 +116,10 @@ public class MapEditorCursor : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Assign ObjectData to the cursor.
+    /// </summary>
+    /// <param name="data">The Object that has been selected</param>
     public void AssignObjectId(MapObjectSelector data)
     {
         // get object data

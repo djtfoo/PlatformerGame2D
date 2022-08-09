@@ -91,7 +91,7 @@ A single `ObjectData` consists of:
 
 ### Map Data
 
-The map consists of a series of grids, with an `Object` (or none) occupying a grid. This grid occupancy represents the map, and is represented as a 2-dimensional character array that is stored in a text file.
+The map consists of a series of grids, with an `Object` (or none) occupying a grid. This grid occupancy represents the map, and is represented as a 2-dimensional character array that is stored in a text file in `StreamingAssets`.
 
 ![Example of the map data](images/mapdata-example.png?raw=true "Map data represented in 2d array")
 

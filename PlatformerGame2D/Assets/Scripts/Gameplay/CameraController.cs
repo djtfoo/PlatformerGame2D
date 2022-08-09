@@ -31,6 +31,9 @@ public class CameraController : MonoBehaviour
         maxXPos = 1000f;
     }
 
+    /// <summary>
+    /// Return the camera to its initial state at the start of the game.
+    /// </summary>
     public void ResetCamera()
     {
         transform.position = initialCameraPos;

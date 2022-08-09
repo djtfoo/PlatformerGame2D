@@ -1,3 +1,9 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: MapGenerator
+ * Generate the map from provided map data by instantiating the required Objects in the map.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

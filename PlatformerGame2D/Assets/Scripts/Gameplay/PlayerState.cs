@@ -1,3 +1,10 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: PlayerState
+ * Stores the game state information of the Player.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +63,9 @@ public class PlayerState : MonoBehaviour
         GetComponent<PlayerControl>().EnableRigidbody(true);
     }
 
+    /// <summary>
+    /// Method to be called to set the player and game state after they die.
+    /// </summary>
     public void SetPlayerDead()
     {
         // Set Player's death
@@ -75,6 +85,9 @@ public class PlayerState : MonoBehaviour
         onPlayerHurt.Invoke();
     }
 
+    /// <summary>
+    /// Method to be called to set the player and game state after they win the game.
+    /// </summary>
     public void SetPlayerWon()
     {
         // Set Player win
@@ -87,12 +100,20 @@ public class PlayerState : MonoBehaviour
         GetComponent<PlayerControl>().EnableUserInput(false);
     }
 
+    /// <summary>
+    /// Increment the Player's score.
+    /// </summary>
+    /// <param name="gain">Amount to increment score by</param>
     public void IncrementScore(int gain)
     {
         Debug.Log("Points gained: " + gain);
         SetScore(score + gain);
     }
 
+    /// <summary>
+    /// Set the player's score to a particular value, and invoke the onScoreChanged event to trigger other actions.
+    /// </summary>
+    /// <param name="newScore">The player's new score</param>
     private void SetScore(int newScore)
     {
         // Set score
@@ -102,6 +123,10 @@ public class PlayerState : MonoBehaviour
         onScoreChanged.Invoke();
     }
 
+    /// <summary>
+    /// Set the player's number of lives to a particular value, and invoke the onLivesChanged event to trigger other actions.
+    /// </summary>
+    /// <param name="newScore">The player's new score</param>
     private void SetNumLives(int newLives)
     {
         // Set lives

@@ -1,3 +1,9 @@
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: UI_PlayerScore
+ * Provides method to update a UI TMP text that represents the player's score.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +19,6 @@ public class UI_PlayerScore : MonoBehaviour
         textObject = GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
     public void UpdateScoreText(PlayerState player)
     {
         // Update text

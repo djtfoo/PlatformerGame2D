@@ -1,3 +1,10 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: InteractableTile
+ * A derived class of Tile, which triggers a set of assigned Effects if the Player collides with it.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +13,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class InteractableTile : Tile
 {
-    [SerializeField] ContactFilter2D hitContactFilter;  // filter for contacts with tile from below
+    [SerializeField] ContactFilter2D hitContactFilter;  // filter contacts to detect collision from below the Tile
 
     [SerializeField] private Effect[] triggerEffects;
 
@@ -18,6 +25,10 @@ public class InteractableTile : Tile
     [SerializeField] private int numInteractionsLeft = 1;
     [SerializeField] private UnityEvent onInteractivityEnded;
 
+    /// <summary>
+    /// Callback function by Unity's engine when a collision occurs with the GameObject this script is attached to.
+    /// </summary>
+    /// <param name="col">Collider that this GameObject collided with</param>
     void OnCollisionEnter2D(Collision2D col)
     {
         if (numInteractionsLeft <= 0)   // tile no longer interactable
@@ -42,7 +53,10 @@ public class InteractableTile : Tile
         }
     }
 
-    // Tile effect to trigger if player hits the tile
+    /// <summary>
+    /// Tile effect to trigger, if the Player hits the tile.
+    /// </summary>
+    /// <param name="col">The Collider that triggered the Effect</param>
     private void TriggerHitEffect(Collision2D col)
     {
         foreach (Effect effect in triggerEffects)
@@ -51,6 +65,9 @@ public class InteractableTile : Tile
         }
     }
 
+    /// <summary>
+    /// Visual and audio feedback upon hitting the Tile.
+    /// </summary>
     protected void OnHitFeedback()
     {
         // Shake tile from hit
@@ -60,6 +77,9 @@ public class InteractableTile : Tile
         AudioManager.instance.PlaySFX("Hit");
     }
 
+    /// <summary>
+    /// Coroutine that shows the visual animation of the tile being shaken.
+    /// </summary>
     protected IEnumerator ShakeTile()
     {
         Vector3 initialPos = tileSprite.position;

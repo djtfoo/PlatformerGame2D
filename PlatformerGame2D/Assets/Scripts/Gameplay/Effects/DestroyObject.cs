@@ -1,4 +1,10 @@
-using System.Collections;
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: DestroyObject
+ * An Effect to destroy a GameObject when triggered.
+ */
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

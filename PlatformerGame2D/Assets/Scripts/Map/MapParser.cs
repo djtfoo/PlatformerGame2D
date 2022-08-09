@@ -1,3 +1,9 @@
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: MapParser
+ * Provide static functions to serialize and deserialize map data.
+ */
 using System;
 using System.Text;
 using UnityEngine;
@@ -7,8 +13,8 @@ public class MapParser
     /// <summary>
     /// Read map data into a 2D char array.
     /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
+    /// <param name="data">The map data as a string</param>
+    /// <returns>The map data in a 2D character array</returns>
     public static char[,] ParseMapData(string data)
     {
         // Split text file into lines
@@ -35,6 +41,11 @@ public class MapParser
         return mapData;
     }
 
+    /// <summary>
+    /// Serialize the map data from a 2D char array into a text string.
+    /// </summary>
+    /// <param name="data">The map data in a 2D character array</param>
+    /// <returns>The map data as a string</returns>
     public static string SerializeMapData(char[,] data)
     {
         StringBuilder sb = new StringBuilder(data.GetLength(0) * data.GetLength(1));

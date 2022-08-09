@@ -1,3 +1,9 @@
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: HurtPlayer
+ * An Effect that inflicts damage to the Player when triggered.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,10 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: Consumable
+ * Stores the game state information of the Player.
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,22 +20,18 @@ public class Consumable : Object
         {
             // Trigger effect of consumable
             TriggerConsumedEffect(col);
-            // Feedback of consumable being picked up
-            OnConsumedFeedback();
         }
     }
 
-    // Effect to trigger if player picks up the consumable
+    /// <summary>
+    /// Effect to trigger if player picks up the Consumable.
+    /// </summary>
+    /// <param name="col">The Collider that triggered the Effect</param>
     private void TriggerConsumedEffect(Collider2D col)
     {
         foreach (Effect effect in triggerEffects)
         {
             effect.TriggerEffect(col);
         }
-    }
-
-    private void OnConsumedFeedback()
-    {
-
     }
 }

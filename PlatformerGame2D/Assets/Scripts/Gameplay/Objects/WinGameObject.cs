@@ -1,4 +1,10 @@
-using System.Collections;
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: WinGameObject
+ * Represents an Object that can handle or check for a win condition in the game.
+ */
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

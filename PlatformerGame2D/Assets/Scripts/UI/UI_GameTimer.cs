@@ -1,3 +1,9 @@
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: UI_GameTimer
+ * Provides method to update a UI TMP text that represents the game timer.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

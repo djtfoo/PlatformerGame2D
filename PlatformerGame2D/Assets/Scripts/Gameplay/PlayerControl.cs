@@ -1,10 +1,8 @@
 /**
  * Created: 6 Aug 2022
  * 
- * Class: MapLoader
- * Generate the map of the level from a text file.
- * 
- * Reference for 2D platformer movement with Rigidbody2D: https://www.youtube.com/watch?v=RWf3mpDaE5g&ab_channel=EmilioBlacksmith
+ * Class: PlayerControl
+ * Obtains user input via InputManager for controlling the player movement.
  */
 
 using System.Collections;

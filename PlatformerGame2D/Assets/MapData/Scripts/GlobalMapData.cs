@@ -1,3 +1,10 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * File: GlobalMapData.cs
+ * GlobalMapData is a ScriptableObject that holds information about the game map shared between the game and editor.
+ * ObjectData represents information about the types of Objects in the game.
+ */
 using UnityEngine;
 
 [System.Serializable]

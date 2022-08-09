@@ -1,3 +1,9 @@
+/**
+ * Created: 6 Aug 2022
+ * 
+ * Class: GameStateManager
+ * Singleton class that tracks the overall state of the game, and triggers the game over overlay screen when the player(s) have won or lost the game.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -207,12 +213,20 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wrapper method for triggering the game over screen.
+    /// </summary>
+    /// <param name="winState">Whether the game is over due to a win or a loss</param>
     private void EnableGameOverScreen(bool winState)
     {
         gameOverScreen.gameObject.SetActive(true);
         gameOverScreen.SetWinState(winState);
     }
 
+    /// <summary>
+    /// Coroutine that waits for a specified time (in seconds), before re-loading the game.
+    /// </summary>
+    /// <param name="seconds">How long to wait for before restarting</param>
     private IEnumerator RestartGame(float seconds)
     {
         yield return new WaitForSeconds(seconds);

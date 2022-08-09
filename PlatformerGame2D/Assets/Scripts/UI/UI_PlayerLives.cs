@@ -1,3 +1,9 @@
+/**
+ * Created: 7 Aug 2022
+ * 
+ * Class: UI_PlayerLives
+ * Provides method to update a UI TMP text that represents the number of player lives left.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +19,6 @@ public class UI_PlayerLives : MonoBehaviour
         textObject = GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
     public void UpdateLivesText(PlayerState player)
     {
         // Update text
